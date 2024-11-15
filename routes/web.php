@@ -13,4 +13,8 @@ Route::resource('libros', LibroController::class);
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/home', [App\Http\Controllers\LibroController::class, 'index'])->name('home');
+
+Route::group(['middleware' => 'auth'], function () {
+    Route::get('/home', [LibroController::class, 'index'])->name('home');
+});
